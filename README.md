@@ -1,22 +1,12 @@
-# CNNGeometric PyTorch implementation
+# AttentiveOACK implementation forked by CNNGeometric
 
-![](http://www.di.ens.fr/willow/research/cnngeometric/images/teaser.png)
+![](http://cvlab.postech.ac.kr/research/a2net/images/a2net.png)
 
-This is the implementation of the paper: 
+This is the implementation of the paper:
 
-I. Rocco, R. Arandjelović and J. Sivic. Convolutional neural network architecture for geometric matching. CVPR 2017 [[website](http://www.di.ens.fr/willow/research/cnngeometric/)][[arXiv](https://arxiv.org/abs/1703.05593)]
+ P. H. Seo, J. Lee, D. Jung, B. Han and M. Cho.  Attentive Semantic Alignment with Offset-Aware Correlation Kernels. ECCV 2017 [[website](http://cvlab.postech.ac.kr/research/a2net/)][[arXiv](https://arxiv.org/abs/1808.02128)]
 
-using PyTorch ([for MatConvNet implementation click here](https://github.com/ignacio-rocco/cnngeometric_matconvnet)).
-
-If you use this code in your project, please cite use using:
-````
-@InProceedings{Rocco17,
-  author       = "Rocco, I. and Arandjelovi\'c, R. and Sivic, J.",
-  title        = "Convolutional neural network architecture for geometric matching",
-  booktitle    = "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition",
-  year         = "2017",
-}
-````
+using PyTorch.
 
 ## Dependencies ###
   - Python 3
@@ -27,17 +17,23 @@ If you use this code in your project, please cite use using:
   - demo.py demonstrates the results on the ProposalFlow dataset
   - train.py is the main training script
   - eval_pf.py evaluates on the ProposalFlow dataset
-  
+
 ## Trained models ###
 
-#### Using Streetview-synth dataset + VGG
-  - [[Affine]](http://www.di.ens.fr/willow/research/cnngeometric/trained_models/pytorch/best_streetview_checkpoint_adam_affine_grid_loss.pth.tar), [[TPS]](http://www.di.ens.fr/willow/research/cnngeometric/trained_models/pytorch/best_streetview_checkpoint_adam_tps_grid_loss.pth.tar)
-  - Results on PF: `PCK affine: 0.472`, `PCK tps: 0.513`, `PCK affine+tps: 0.572`
-
-#### Using Pascal-synth dataset  + VGG
+#### A2Net with VGG-16
   - [[Affine]](http://www.di.ens.fr/willow/research/cnngeometric/trained_models/pytorch/best_pascal_checkpoint_adam_affine_grid_loss.pth.tar), [[TPS]](http://www.di.ens.fr/willow/research/cnngeometric/trained_models/pytorch/best_pascal_checkpoint_adam_tps_grid_loss.pth.tar)
   - Results on PF: `PCK affine: 0.478`, `PCK tps: 0.428`, `PCK affine+tps: 0.568`
 
-#### Using Pascal-synth dataset  + ResNet-101
+#### A2Net with ResNet-101
   - [[Affine]](http://www.di.ens.fr/willow/research/cnngeometric/trained_models/pytorch/best_pascal_checkpoint_adam_affine_grid_loss_resnet_random.pth.tar), [[TPS]](http://www.di.ens.fr/willow/research/cnngeometric/trained_models/pytorch/best_pascal_checkpoint_adam_tps_grid_loss_resnet_random.pth.tar)
   - Results on PF: `PCK affine: 0.559`, `PCK tps: 0.582`, `PCK affine+tps: 0.676`
+
+## BibTeX ##
+````
+@inproceedings{paul2018attentive,
+   title={Attentive Semantic Alignment with Offset-Aware Correlation Kernels},
+   author={Paul Hongsuck Seo and Jongmin Lee and Deunsol Jung and Bohyung Han and Minsu Cho},
+   booktitle={ECCV}
+   year={2018}
+}
+````
