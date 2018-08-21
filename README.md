@@ -1,6 +1,6 @@
 # AttentiveOACK implementation forked by CNNGeometric
 
-![](http://cvlab.postech.ac.kr/research/a2net/images/A2Net.png)
+![](http://cvlab.postech.ac.kr/research/A2Net/images/a2net.png)
 
 This is the implementation of the paper:
 
