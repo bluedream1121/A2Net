@@ -10,3 +10,5 @@ results/
 trained_models/
 **/*.bak
 *.png
+eval_pf_pascal.py
+.ftpconfig

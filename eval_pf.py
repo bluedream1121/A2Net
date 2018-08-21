@@ -13,6 +13,8 @@ from geotnf.point_tnf import *
 from geotnf.transformation import GeometricTnf
 from collections import OrderedDict
 
+import pickle
+from functools import partial
 
 """
 
@@ -47,6 +49,9 @@ if do_aff:
     model_aff = CNNGeometric(use_cuda=use_cuda,geometric_model='affine',feature_extraction_cnn=args.feature_extraction_cnn)
 if do_tps:
     model_tps = CNNGeometric(use_cuda=use_cuda,geometric_model='tps',feature_extraction_cnn=args.feature_extraction_cnn)
+
+pickle.load = partial(pickle.load, encoding="latin1")
+pickle.Unpickler = partial(pickle.Unpickler, encoding="latin1")
 
 # Load trained weights
 print('Loading trained model weights...')
@@ -96,53 +101,53 @@ total_correct_points_tps = 0
 total_correct_points_aff_tps = 0
 total_points = 0
 for i, batch in enumerate(dataloader):
-   
+
     batch = batchTensorToVars(batch)
-    
+
     source_im_size = batch['source_im_size']
     target_im_size = batch['target_im_size']
 
     source_points = batch['source_points']
     target_points = batch['target_points']
-    
+
     # warp points with estimated transformations
     target_points_norm = PointsToUnitCoords(target_points,target_im_size)
-    
+
     if do_aff:
         model_aff.eval()
     if do_tps:
         model_tps.eval()
-        
+
     if do_aff:
         theta_aff=model_aff(batch)
-        
+
         # do affine only
         warped_points_aff_norm = pt.affPointTnf(theta_aff,target_points_norm)
         warped_points_aff = PointsToPixelCoords(warped_points_aff_norm,source_im_size)
 
     if do_tps:
         theta_tps=model_tps(batch)
-        
+
         # do tps only
         warped_points_tps_norm = pt.tpsPointTnf(theta_tps,target_points_norm)
         warped_points_tps = PointsToPixelCoords(warped_points_tps_norm,source_im_size)
-        
+
     if do_aff and do_tps:
         warped_image_aff = affTnf(batch['source_image'],theta_aff.view(-1,2,3))
-        theta_aff_tps=model_tps({'source_image': warped_image_aff, 'target_image': batch['target_image']})        
+        theta_aff_tps=model_tps({'source_image': warped_image_aff, 'target_image': batch['target_image']})
 
         # do tps+affine
         warped_points_aff_tps_norm = pt.tpsPointTnf(theta_aff_tps,target_points_norm)
         warped_points_aff_tps_norm = pt.affPointTnf(theta_aff,warped_points_aff_tps_norm)
         warped_points_aff_tps = PointsToPixelCoords(warped_points_aff_tps_norm,source_im_size)
-    
+
     L_pck = batch['L_pck'].data
-    
+
     if do_aff:
         correct_points_aff, num_points = correct_keypoints(source_points.data,
                                                        warped_points_aff.data,L_pck)
         total_correct_points_aff += correct_points_aff
-        
+
     if do_tps:
         correct_points_tps, num_points = correct_keypoints(source_points.data,
                                                            warped_points_tps.data,L_pck)
@@ -151,10 +156,10 @@ for i, batch in enumerate(dataloader):
     if do_aff and do_tps:
         correct_points_aff_tps, num_points = correct_keypoints(source_points.data,
                                                            warped_points_aff_tps.data,L_pck)
-        total_correct_points_aff_tps += correct_points_aff_tps        
+        total_correct_points_aff_tps += correct_points_aff_tps
 
     total_points += num_points
-       
+
     print('Batch: [{}/{} ({:.0f}%)]'.format(i, len(dataloader), 100. * i / len(dataloader)))
 
 if do_aff:
@@ -167,6 +172,3 @@ if do_aff and do_tps:
     PCK_aff_tps=total_correct_points_aff_tps/total_points
     print('PCK affine+tps:',PCK_aff_tps)
 print('Done!')
-
-
-
