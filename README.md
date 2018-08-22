@@ -1,10 +1,10 @@
-# AttentiveOACK implementation forked by CNNGeometric
+# A2Net implementation forked by CNNGeometric
 
 ![](http://cvlab.postech.ac.kr/research/A2Net/images/a2net.png)
 
 This is the implementation of the paper:
 
- P. H. Seo, J. Lee, D. Jung, B. Han and M. Cho.  Attentive Semantic Alignment with Offset-Aware Correlation Kernels. ECCV 2017 [[website](http://cvlab.postech.ac.kr/research/A2Net/)][[arXiv](https://arxiv.org/abs/1808.02128)]
+ P. H. Seo, J. Lee, D. Jung, B. Han and M. Cho.  Attentive Semantic Alignment with Offset-Aware Correlation Kernels. ECCV 2018 [[website](http://cvlab.postech.ac.kr/research/A2Net/)][[arXiv](https://arxiv.org/abs/1808.02128)]
 
 using PyTorch.
 
