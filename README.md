@@ -30,7 +30,7 @@ Note that there has been some inconsistency across related papers in determining
 
 Unfortunately, this issue confuses the comparisons across the methods. In producing the PF-PASCAL benchmark comparison in our paper, we’ve used the codes from the previous methods and in doing so we made some mistake in some of evaluation due to the issue. 
 
-Although the overall tendencies of performances between models remain unchanged, scores of some models are overestimated. We have posted a new version of our paper in arXiv with all the correct scores measured with bounding box sizes. Please refer to this version for the correct scores: https://arxiv.org/abs/1808.02128 and our revised evaluation code..?? We apologize for all this inconvenience.
+Although the overall tendencies of performances between models remain unchanged, scores of some models are overestimated. We have posted a new version of our paper in arXiv with all the correct scores measured with bounding box sizes. Please refer to this version for the correct scores: https://arxiv.org/abs/1808.02128 . We apologize for all this inconvenience.
 
 
 
